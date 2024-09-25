@@ -14,6 +14,7 @@ Ever wanted to block websites that are making you idle? With tsurugi you can, ri
   - Support plain text blocks locally and remotely
 - Run `tsurugi` and you're free of distractions
 - Interface tailored for better experience and usability
+- Prebuilt binaries for Linux and Darwin platforms
 
 ## Contributing
 
@@ -58,6 +59,20 @@ Or just run the project
 
 ```sh
 go run cmd/main.go
+```
+
+### How to build
+
+With [Go](https://go.dev/) installed, building tsurugi should be as easy as running the following command
+
+```sh
+go build cmd/main.go -o tsurugi
+```
+
+However, running the command below should generate a more lightweight binary
+
+```sh
+CGO_ENABLED=0 go build -ldflags='-w -s' cmd/main.go -o tsurugi
 ```
 
 ## License
