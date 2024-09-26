@@ -4,10 +4,7 @@
 
 Ever wanted to block websites that are making you idle? With tsurugi you can, right from your terminal!
 
-> [!IMPORTANT]
-> Work in progress...
-
-## What to expect
+## 👀 What to expect
 
 - Configure easily
   - Set blocks in a [`tsurugi.toml`](https://toml.io/en/) using the CLI
@@ -16,7 +13,10 @@ Ever wanted to block websites that are making you idle? With tsurugi you can, ri
 - Interface tailored for better experience and usability
 - Prebuilt binaries for Linux and Darwin platforms
 
-## Contributing
+> [!IMPORTANT]
+> Work in progress...
+
+## 💖 Contributing
 
 Feel free to contribute [opening an issue](https://github.com/kauefraga/tsurugi/issues/new) to report a bug or suggesting a CLI change, an improvement or a feature.
 
@@ -29,13 +29,13 @@ Feel free to contribute [opening an issue](https://github.com/kauefraga/tsurugi/
 5. Run `git push` to sync the changes
 6. Open a pull request specifying what you did
 
-## More about the project
+## 🔎 More about the project
 
 ### Why "tsurugi"
 
 > Tsurugi is a Japanese term for a straight, double-edged sword used in antiquity.
 
-I was watching [Tsue to Tsurugi no Wistoria](https://myanimelist.net/anime/58059/Tsue_to_Tsurugi_no_Wistoria) (Wistoria: Wand and Sword) and thinking about this project to block distractions, then suddenly I thought of "cutting" the distractions...
+I was watching [Tsue to **Tsurugi** no Wistoria](https://myanimelist.net/anime/58059/Tsue_to_Tsurugi_no_Wistoria) (Wistoria: Wand and **Sword**) and thinking about this project to block distractions, then suddenly I thought of "cutting" the distractions...
 
 ### Why is it not available for Windows
 
@@ -43,7 +43,7 @@ The key idea of tsurugi is to use the `/etc/hosts` file to block websites.
 
 This file in question exists in most unix-like operating systems such as Linux distributions, MacOS, BSD and others. Windows has this file too, but it's inside the System32 folder, that's a problem because the user would need to execute tsurugi with admin privileges in order to achieve the same result of unix-like systems.
 
-The cross platform solution would be to block websites directly in the network with a proxy server. However, in the first version I want to keep it as simple as possible.
+The cross platform solution would be to block websites directly in the network with a proxy server. However, in the first version I want to **keep it as simple as possible**.
 
 ### How to setup dev environment
 
@@ -75,7 +75,7 @@ However, running the command below should generate a more lightweight binary
 CGO_ENABLED=0 go build -ldflags='-w -s' cmd/main.go -o tsurugi
 ```
 
-## License
+## 📝 License
 
 This project is licensed under the MIT License - See the [LICENSE](https://github.com/kauefraga/tsurugi/blob/main/LICENSE) for more information.
 
