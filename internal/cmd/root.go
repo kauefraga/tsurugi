@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strings"
 
+	"github.com/fatih/color"
 	"github.com/kauefraga/tsurugi/internal/blocker"
 	"github.com/spf13/cobra"
 )
@@ -18,16 +18,24 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hosts, err := blocker.GetHosts(args[0])
 		if err != nil {
-			fmt.Println("Error: could not get hosts list")
+			color.Red("Error: could not get hosts list")
 			os.Exit(1)
 		}
 
-		fmt.Println("The following hosts are being blocked:")
-		fmt.Println(strings.Join(hosts, "\n"))
-
 		err = blocker.WriteHosts(hosts)
 		if err != nil {
-			fmt.Println("Could not block hosts. Try running tsurugi with sudo.")
+			color.Red("Error: could not block hosts")
+			fmt.Println("Might be lack of permissions, try again with sudo")
+			fmt.Println(
+				color.MagentaString("$"),
+				color.HiBlackString("sudo tsurugi %s", args[0]),
+			)
+			os.Exit(1)
+		}
+
+		fmt.Println("New blocked hosts:")
+		for _, host := range hosts {
+			color.Green("+ %s", host)
 		}
 	},
 }
