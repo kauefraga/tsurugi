@@ -34,7 +34,12 @@ func WriteHosts(hosts []string) error {
 		blockList = append(blockList, block)
 	}
 
-	blockFile := strings.Join(blockList, "\n")
+	currentHostsFile, err := os.ReadFile(HOSTS_PATH)
+	if err != nil {
+		return err
+	}
 
-	return os.WriteFile(HOSTS_PATH, []byte(blockFile), 0666)
+	newHostsFile := string(currentHostsFile) + strings.Join(blockList, "\n")
+
+	return os.WriteFile(HOSTS_PATH, []byte(newHostsFile), 0666)
 }
