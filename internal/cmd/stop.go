@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strings"
 
+	"github.com/fatih/color"
 	"github.com/kauefraga/tsurugi/internal/blocker"
 	"github.com/spf13/cobra"
 )
@@ -14,34 +14,17 @@ var stopCmd = &cobra.Command{
 	Short:   "Unblock websites",
 	Aliases: []string{"unblock", "allow"},
 	Run: func(cmd *cobra.Command, args []string) {
-		currentHostsFile, err := os.ReadFile(blocker.HOSTS_PATH)
+		err := blocker.RemoveHosts()
 		if err != nil {
-			fmt.Println(err)
+			color.Red("Error: could not unblock hosts")
+			fmt.Println("Might be lack of permissions, try again with sudo")
+			fmt.Println(
+				color.MagentaString("$"),
+				color.HiBlackString("sudo tsurugi stop"),
+			)
 			os.Exit(1)
 		}
 
-		var newHostsFile []string
-		isTsurugiBlockList := false
-
-		lines := strings.Split(string(currentHostsFile), "\n")
-		for _, line := range lines {
-			if strings.Contains(line, "# tsurugi blocks start") {
-				isTsurugiBlockList = true
-			}
-
-			if strings.Contains(line, "# tsurugi blocks end") {
-				isTsurugiBlockList = false
-				continue
-			}
-
-			if !isTsurugiBlockList {
-				newHostsFile = append(newHostsFile, line)
-			}
-		}
-
-		os.WriteFile(
-			blocker.HOSTS_PATH,
-			[]byte(strings.Join(newHostsFile, "\n")),
-			0666)
+		color.Green("You can access the websites again, enjoy!")
 	},
 }

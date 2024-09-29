@@ -47,3 +47,34 @@ func WriteHosts(hosts []string) error {
 
 	return os.WriteFile(HOSTS_PATH, []byte(newHostsFile), 0666)
 }
+
+// restore /etc/hosts
+func RemoveHosts() error {
+	currentHostsFile, err := os.ReadFile(HOSTS_PATH)
+	if err != nil {
+		return err
+	}
+
+	var newHostsFile []string
+	isTsurugiBlockList := false
+
+	lines := strings.Split(string(currentHostsFile), "\n")
+	for _, line := range lines {
+		if strings.Contains(line, "# tsurugi blocks start") {
+			isTsurugiBlockList = true
+		}
+
+		if strings.Contains(line, "# tsurugi blocks end") {
+			isTsurugiBlockList = false
+			continue
+		}
+
+		if !isTsurugiBlockList {
+			newHostsFile = append(newHostsFile, line)
+		}
+	}
+
+	newHostsFileContent := strings.Join(newHostsFile, "\n")
+
+	return os.WriteFile(HOSTS_PATH, []byte(newHostsFileContent), 0666)
+}
