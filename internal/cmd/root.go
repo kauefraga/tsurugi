@@ -13,7 +13,6 @@ var rootCmd = &cobra.Command{
 	Use:     "tsurugi blocklist",
 	Version: "1.0.0",
 	Short:   "Easily block distracting websites using tsurugi",
-	Example: "tsurugi\ntsurugi blocklist.txt\ntsurugi url",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		hosts, err := blocker.GetHosts(args[0])
@@ -41,6 +40,8 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
+	rootCmd.AddCommand(stopCmd)
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
