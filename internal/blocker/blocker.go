@@ -39,7 +39,11 @@ func WriteHosts(hosts []string) error {
 		return err
 	}
 
-	newHostsFile := string(currentHostsFile) + strings.Join(blockList, "\n")
+	newHostsFile := string(currentHostsFile) + fmt.Sprint(
+		"# tsurugi blocks start (DO NOT REMOVE THIS COMMENT)\n",
+		strings.Join(blockList, "\n")+"\n",
+		"# tsurugi blocks end (DO NOT REMOVE THIS COMMENT)\n",
+	)
 
 	return os.WriteFile(HOSTS_PATH, []byte(newHostsFile), 0666)
 }
