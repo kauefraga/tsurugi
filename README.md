@@ -13,12 +13,50 @@ Ever wanted to block websites that are making you idle? With tsurugi you can, ri
 - Configure easily
   - Set blocks in a [`tsurugi.toml`](https://toml.io/en/) using the CLI
   - Support plain text blocks locally and remotely
+  - Create block lists and choose which you want to use
 - Run `tsurugi` and you're free of distractions
 - Interface tailored for better experience and usability
 - Prebuilt binaries for Linux and Darwin platforms
 
 > [!IMPORTANT]
 > Work in progress...
+
+## ⚒️ Usage
+
+### Installation
+
+Go to the [latest release](https://github.com/kauefraga/tsurugi/releases) page and download the prebuilt binary for your platform.
+
+### Blocking websites
+
+Create a plain text file with your blocks
+
+```txt
+bsky.app
+youtube.com
+www.youtube.com
+instagram.com
+twitch.tv
+www.twitch.tv
+```
+
+And run
+
+```sh
+sudo ./tsurugi blocklist.txt
+```
+
+If you want to unblock those websites, just run
+
+```sh
+sudo ./tsurugi stop
+```
+
+Alternatively, you can [create a gist](https://gist.github.com/) and pass url (raw)
+
+```sh
+sudo ./tsurugi https://gist.githubusercontent.com/kauefraga/433dc03487e71f8df477e5584d2d2c23/raw/c7c9310ed790e481dbd9b5cd79b96a7ac3f711f9/blocklist.txt
+```
 
 ## 💖 Contributing
 
@@ -41,13 +79,16 @@ Feel free to contribute [opening an issue](https://github.com/kauefraga/tsurugi/
 
 I was watching [Tsue to **Tsurugi** no Wistoria](https://myanimelist.net/anime/58059/Tsue_to_Tsurugi_no_Wistoria) (Wistoria: Wand and **Sword**) and thinking about this project to block distractions, then suddenly I thought of "cutting" the distractions...
 
-### Why is it not available for Windows
+### Why is it not working
 
 The key idea of tsurugi is to use the `/etc/hosts` file to block websites.
 
-This file in question exists in most unix-like operating systems such as Linux distributions, MacOS, BSD and others. Windows has this file too, but it's inside the System32 folder, that's a problem because the user would need to execute tsurugi with admin privileges in order to achieve the same result of unix-like systems.
+- `/etc/hosts` is being bypassed by your browser or your browser extensions
+- Your system is using IPv6
+- You are using a VPN
+- Browser cache or DNS cache is bypassing `/etc/hosts` new entries
 
-The cross platform solution would be to block websites directly in the network with a proxy server. However, in the first version I want to **keep it as simple as possible**.
+The best solution would be to block websites directly in the network with a proxy server. However, in the first version I want to **keep it as simple as possible**.
 
 ### How to setup dev environment
 
