@@ -1,5 +1,9 @@
 # `tsurugi`
 
+[![GitHub latest version](https://img.shields.io/github/v/tag/kauefraga/tsurugi?label=latest+version)](https://github.com/kauefraga/tsurugi/releases)
+[![GitHub's license](https://img.shields.io/github/license/kauefraga/tsurugi)](https://github.com/kauefraga/tsurugi/blob/main/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/kauefraga/tsurugi/main)](https://github.com/kauefraga/tsurugi)
+
 > Cut out distractions with tsurugi! Easily block distracting websites.
 
 Ever wanted to block websites that are making you idle? With tsurugi you can, right from your terminal!
